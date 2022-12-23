@@ -42,6 +42,17 @@ class DataBase:
         except Exception as e:
             print(f"Failed to execute. Query: \n with error:\n{e}")
             return []
+    
+    def add_user(self,name,email,password):
+        query = "INSERT INTO User (Name,Email,Password) VALUES (?,?,?)"
+        try:
+          self.conn.execute(query,(name,email,password))
+          self.conn.commit()
+          return True
+        except Exception as e:
+            print(f"Failed to execute. Query: \n with error:\n{e}")
+            return False
+    
 
 
 db = DataBase()
@@ -64,7 +75,7 @@ def create_app():
 def index():
     
     categories = db.get_categories_count()
-    if session.get("user_id") is None:
+    if session.get("user_name") is None:
         data = {
             "Name": "Sign In",
             "Email": "Sign In",   
@@ -105,6 +116,14 @@ def signin():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    if request.method == "POST":
+        name=request.form.get("signUpName")
+        email=request.form.get("signUpEmail")
+        password=request.form.get("signUpPassword")
+        db.add_user(name,email,password)
+        session["user_name"] = name
+        session["user_email"] = email
+        return redirect(url_for("index"))
     return render_template("signup.html")
 
 @app.route("/signout")

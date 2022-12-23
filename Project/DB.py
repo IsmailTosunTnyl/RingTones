@@ -30,7 +30,15 @@ class DataBase:
         except Exception as e:
             print(f"Failed to execute. Query: \n with error:\n{e}")
             return []
-       
+    def add_user(self,name,email,password):
+        query = "INSERT INTO User (Name,Email,Password) VALUES (?,?,?)"
+        try:
+          self.conn.execute(query,(name,email,password))
+          self.conn.commit()
+          return True
+        except Exception as e:
+            print(f"Failed to execute. Query: \n with error:\n{e}")
+            return False
     
 if __name__ == '__main__':
     db = DataBase()
