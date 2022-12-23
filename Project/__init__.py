@@ -32,6 +32,16 @@ class DataBase:
         except Exception as e:
             print(f"Failed to execute. Query: \n with error:\n{e}")
             return []
+    def get_categories_count(self):
+        query = "select Category_name,count(*) as count from Ringtones join Category C on Ringtones.Ringtone_category_id = C.Category_id GROUP BY Ringtone_category_id"
+        try:
+          self.conn.row_factory = sqlite3.Row
+          things = self.conn.execute(query).fetchall()
+          unpacked = [{k: item[k] for k in item.keys()} for item in things]
+          return unpacked
+        except Exception as e:
+            print(f"Failed to execute. Query: \n with error:\n{e}")
+            return []
 
 
 db = DataBase()
@@ -52,7 +62,8 @@ def create_app():
 
 @app.route("/")
 def index():
-    categories = db.get_categories()
+    
+    categories = db.get_categories_count()
     if session.get("user_id") is None:
         data = {
             "Name": "Sign In",
