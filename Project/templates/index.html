@@ -23,24 +23,22 @@
         <div class="collapse navbar-collapse ms-auto position-absolute top-0 end-0" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-1">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="#">🏠Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Orders </a>
+              <a class="nav-link" href="#">🛒Orders</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Mehmet Emre Yılmaz
+                {{data.Name}}
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Sign-in</a></li>
-                <li><a class="dropdown-item" href="#">Sign-up</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Log-out</a></li>
+                <li><a class="dropdown-item" href="/signout">Log-out</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled">♫𝄞🎶</a>
+              <a class="nav-link disabled">🎵🎶</a>
             </li>
           </ul>
         </div>
@@ -78,10 +76,12 @@
                         </header>
                         <div class="filter-content">
                             <div class="card-body">
+
+                                {%for i in categories %}
                                 <div class="custom-control custom-checkbox">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <label class="custom-control-label" for="Check1">Sea</label>
+                                            <label class="custom-control-label" for="Check1">{{i.Category_name}}</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <span class="float-right badge badge-light round text-black">52</span>
@@ -91,11 +91,43 @@
                                         </div>
                                     </div>
                                 </div> <!-- form-check.// -->
-                                
+                                {% endfor %}
+                               
+
                                 <div class="custom-control custom-checkbox">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <label class="custom-control-label" for="Check1">Bird</label>
+                                            <label class="custom-control-label" for="Check1">Instrumental</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <span class="float-right badge badge-light round text-black">52</span>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" class="custom-control-input m-auto" id="Check1">
+                                        </div>
+                                    </div>
+                                    
+                                </div> <!-- form-check.// -->
+
+                                <div class="custom-control custom-checkbox">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label class="custom-control-label" for="Check1">City</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <span class="float-right badge badge-light round text-black">52</span>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" class="custom-control-input m-auto" id="Check1">
+                                        </div>
+                                    </div>
+                                    
+                                </div> <!-- form-check.// -->
+
+                                <div class="custom-control custom-checkbox">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label class="custom-control-label" for="Check1">Forest</label>
                                         </div>
                                         <div class="col-sm-4">
                                             <span class="float-right badge badge-light round text-black">52</span>

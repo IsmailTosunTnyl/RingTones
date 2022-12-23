@@ -19,8 +19,20 @@ class DataBase:
         except Exception as e:
             print(f"Failed to execute. Query: \n with error:\n{e}")
             return []
+    
+    def get_categories(self):
+        query = "SELECT * FROM Category"
+        try:
+          self.conn.row_factory = sqlite3.Row
+          things = self.conn.execute(query).fetchall()
+          unpacked = [{k: item[k] for k in item.keys()} for item in things]
+          return unpacked
+        except Exception as e:
+            print(f"Failed to execute. Query: \n with error:\n{e}")
+            return []
        
     
 if __name__ == '__main__':
     db = DataBase()
-    print(db.find_user_with_email('mail1','6060'))
+    print(db.find_user_with_email('mail1@dd','6060'))
+    print(db.get_categories())
