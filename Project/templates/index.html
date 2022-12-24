@@ -16,7 +16,7 @@
         </button>
         <div class="mx-auto">
           <form class="d-flex m-auto" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control me-2" type="search" id="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
         </div>
@@ -66,11 +66,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>Min</label>
-                                        <input type="number" class="form-control" min="0" id="inputEmail4" placeholder="$min">
+                                        <input type="number" class="form-control" min="0" id="inputMin" placeholder="$min">
                                     </div>
                                     <div class="form-group col-md-6 text-right">
                                         <label>Max</label>
-                                        <input type="number" class="form-control" min="0" placeholder="$max">
+                                        <input type="number" class="form-control" min="0" id="inputMax" placeholder="$max">
                                     </div>
                                 </div>
                             </div> <!-- card-body.// -->
@@ -105,8 +105,8 @@
                 </div> <!-- card.// -->
             
             </aside> <!-- col.// -->
-            <section class="col-sm-10">
-                <div class="row">
+            <section class="col-sm-10" id="alllist">
+                <div class="row" >
                     <div class="col-sm-4">
                         <div class="card" style="width: 19rem;">
                             <img src="https://picsum.photos/500/400" class="card-img-top" alt="...">
@@ -331,6 +331,7 @@
 
     <script type="text/javascript">
         var categories = {{categories|tojson}}
+        var ringtones = {{ringtones|tojson}}
      </script>
     <script src="../static/index.js"></script>
   

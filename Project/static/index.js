@@ -5,6 +5,58 @@
 var values = [];
 var checkboxes_input = document.querySelectorAll('input[type=checkbox]');
 var checkboxes_text = document.querySelectorAll('.custom-control-label');
+var search = document.getElementById('search');
+var inputMin = document.getElementById('inputMin');
+var inputMax = document.getElementById('inputMax');
+
+function minmax_filter() {
+    min = inputMin.value;
+    max = inputMax.value;
+    console.log(min+" "+max);
+    if (min == "" || max == "") {
+        display_cards(ringtones);
+    }
+    else {
+        var new_ringtones = [];
+        for (var i = 0; i < ringtones.length; i++) {
+            console.log(ringtones[i].Ringtone_price);
+            if (ringtones[i].Ringtone_price >= min && ringtones[i].Ringtone_price <= max) {
+                new_ringtones.push(ringtones[i]);
+            }
+        }
+        display_cards(new_ringtones);
+    }
+
+
+};
+inputMax.addEventListener('change', (event) => {
+    console.log(event.target.value);
+    minmax_filter();
+
+});
+inputMin.addEventListener('change', (event) => {
+    console.log(event.target.value);
+    minmax_filter();
+});
+
+
+search.addEventListener('keyup', (event) => {
+    var search_value = event.target.value;
+    console.log(search_value);
+    var new_ringtones = [];
+    for (var i = 0; i < ringtones.length; i++) {
+        if (ringtones[i].Ringtone_name.toLowerCase().includes(search_value.toLowerCase())) {
+            new_ringtones.push(ringtones[i]);
+        }
+    }
+    display_cards(new_ringtones);
+    console.log(new_ringtones);
+
+
+});
+
+
+
 
 // match the checkboxes with the labels
 checkboxes_input.forEach((checkbox, index) => {
@@ -15,20 +67,112 @@ checkboxes_input.forEach((checkbox, index) => {
 // add event listener to the checkboxes
 checkboxes_input.forEach((checkbox,index) => {
     checkbox.addEventListener('change', (event) => {
-        // get the values of the selected checkboxes
         values = [];
         if (checkbox.checked) {
             checkboxes_input.forEach((checkbox, index) => {
                 if (checkbox.checked) {
                     values.push(checkbox.text);
                 }
+                
+   
             });
         }
-        console.log(values);
+       
+        fiter_ringtones(ringtones,values);
     });
+    fiter_ringtones(ringtones,values);
+
 });
 
+// get a div with id="alllist"
+
+// change the innerHTML of the div
+
+function fiter_ringtones( ringtones,values) {
+     // get the values of the selected checkboxes
+  
+     console.log(values);
+     if (values.length != 0) {
+     new_ringtones = [];
+     for (var i = 0; i < ringtones.length; i++) {
+         for (var j = 0; j < values.length; j++) {
+             
+             if (ringtones[i].Category_name == values[j]) {
+                 new_ringtones.push(ringtones[i]);
+                 console.log(ringtones[i].Category_name + " -- " + values[j]);
+                 
+             }
+
+         }
+         console.log(new_ringtones);
+         display_cards(new_ringtones);
+     };
+     }
+     else {
+         display_cards(ringtones);
+     }
 
 
-console.log(categories);
+
+
+
+};
+
+console.log(ringtones);
+
+// list alllist items in allList div with 3 columns by changing the innerHTML
+
+
+function display_cards( ringtones_f) {
+    var temp = `<div class="row mt-3">`;
+    var col = 0;
+for (var index = 0; index < ringtones_f.length; index = index+1) {
+    console.log("index"+index);
+    console.log("length"+ringtones_f.length);
+    if (col == 3){
+        temp +=`<div class="row mt-3">`;
+        
+    }
+    
+
+    temp += `<div class="col-sm-4"> 
+    <div class="card" style="width: 19rem;">
+        <img src="https://picsum.photos/500/400" class="card-img-top" alt="...">
+        <div class="m-auto">
+                <audio controls>
+                <source src="horse.ogg" type="audio/ogg">
+                <source src="horse.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+                </audio>
+            </div>
+        <div class="card-body">
+            <h5 class="card-title">${ringtones_f[index].Ringtone_name}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+    </div>`
+
+ 
+    col += 1;
+
+
+
+
+
+
+   
+
+
+    }
+    
+
+var alllist = document.getElementById('alllist');
+alllist.innerHTML = temp;
+
+}
+
+display_cards(ringtones);
+
+
 

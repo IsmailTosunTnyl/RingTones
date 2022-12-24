@@ -39,6 +39,16 @@ class DataBase:
         except Exception as e:
             print(f"Failed to execute. Query: \n with error:\n{e}")
             return False
+    def get_ringtones(self):
+        query = "select * from Ringtones join Category C on Ringtones.Ringtone_category_id = C.Category_id;"
+        try:
+          self.conn.row_factory = sqlite3.Row
+          things = self.conn.execute(query).fetchall()
+          unpacked = [{k: item[k] for k in item.keys()} for item in things]
+          return unpacked
+        except Exception as e:
+            print(f"Failed to execute. Query: \n with error:\n{e}")
+            return []
     
 if __name__ == '__main__':
     db = DataBase()
