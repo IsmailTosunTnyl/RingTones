@@ -13,35 +13,7 @@ function alertFunct() {
     alert("Ringtone added to cart");
 }
 
-function minmax_filter() {
-    min = inputMin.value;
-    max = inputMax.value;
-    console.log(min+" "+max);
-    if (min == "" || max == "") {
-        display_cards(ringtones);
-    }
-    else {
-        var new_ringtones = [];
-        for (var i = 0; i < ringtones.length; i++) {
-            console.log(ringtones[i].Ringtone_price);
-            if (ringtones[i].Ringtone_price >= min && ringtones[i].Ringtone_price <= max) {
-                new_ringtones.push(ringtones[i]);
-            }
-        }
-        display_cards(new_ringtones);
-    }
 
-
-};
-inputMax.addEventListener('change', (event) => {
-    console.log(event.target.value);
-    minmax_filter();
-
-});
-inputMin.addEventListener('change', (event) => {
-    console.log(event.target.value);
-    minmax_filter();
-});
 
 
 search.addEventListener('keyup', (event) => {
@@ -94,7 +66,7 @@ checkboxes_input.forEach((checkbox,index) => {
 
 function fiter_ringtones( ringtones,values) {
      // get the values of the selected checkboxes
-  
+     console.log(ringtones);   
      console.log(values);
      if (values.length != 0) {
      new_ringtones = [];
@@ -144,19 +116,16 @@ for (var index = 0; index < ringtones_f.length; index = index+1) {
         <img src="https://picsum.photos/500/400" class="card-img-top" alt="...">
         <div class="m-auto">
                 <audio controls>
-                <source src=${ringtones_f[index].Ringtone_demopath} type="audio/mpeg">
+                
+                <source src=${ringtones_f[index].Ringtone_path} type="audio/mpeg">
                 Your browser does not support the audio element.
                 </audio>
             </div>
         <div class="card-body">
             <h5 class="card-title">${ringtones_f[index].Ringtone_name}</h5>
-            <p class="card-text"> <b>Price:</b> ${ringtones_f[index].Ringtone_price}TL </p>
+            <p class="card-text">Download by Clicking the three dot</p>
             <p class="card-text"> ${ringtones_f[index].Ringtone_description}</p>
 
-            <form action="" method="post">
-            <a href="/add_to_cart/${ringtones_f[index].Ringtone_id}" onClick="alertFunct()" type="submit" class="btn btn-primary">Add To Cart</a>
-            
-            </form>
         </div>
     </div>
     </div>`
