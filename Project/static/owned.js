@@ -113,7 +113,7 @@ for (var index = 0; index < ringtones_f.length; index = index+1) {
 
     temp += `<div class="col-sm-4"> 
     <div class="card" style="width: 19rem;">
-        <img src="https://picsum.photos/500/400" class="card-img-top" alt="...">
+        <img src=${ringtones_f[index].Ringtone_image} class="card-img-top" alt="...">
         <div class="m-auto">
                 <audio controls>
                 

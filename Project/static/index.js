@@ -141,7 +141,7 @@ for (var index = 0; index < ringtones_f.length; index = index+1) {
 
     temp += `<div class="col-sm-4"> 
     <div class="card" style="width: 19rem;">
-        <img src="https://picsum.photos/500/400" class="card-img-top" alt="...">
+        <img src=${ringtones_f[index].Ringtone_image} class="card-img-top" alt="...">
         <div class="m-auto">
                 <audio controls>
                 <source src=${ringtones_f[index].Ringtone_demopath} type="audio/mpeg">
@@ -154,7 +154,7 @@ for (var index = 0; index < ringtones_f.length; index = index+1) {
             <p class="card-text"> ${ringtones_f[index].Ringtone_description}</p>
 
             <form action="" method="post">
-            <a href="/add_to_cart/${ringtones_f[index].Ringtone_id}" onClick="alertFunct()" type="submit" class="btn btn-primary">Add To Cart</a>
+            <a href="/add_to_cart/${ringtones_f[index].Ringtone_id}" onClick="alertFunct()" type="submit" id = "addtocart_btn" class="btn btn-primary">Add To Cart</a>
             
             </form>
         </div>

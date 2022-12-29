@@ -306,7 +306,7 @@ def buy_cart():
         userid=session["user_id"]
         ringtone_ids = db.get_rintone_ids_cart(userid)
         db.buy_cart(userid,ringtone_ids)    
-        return redirect(url_for('index'))
+        return redirect(url_for('order_complete'))
 
 
 @app.route("/ownedringtones")
@@ -328,6 +328,32 @@ def ownedringtones():
         }
             
         return render_template("owned.html", data=data,categories=categories,ringtones=ringtones,alerts=[])
+
+@app.route("/order-complete/")
+def order_complete():
+    tempalert = alerts
+    if alerts[0]:
+        alerts[0] = 0
+    
+    
+    
+    categories = db.get_categories_count()
+    ringtones = db.get_ringtones()
+    if session.get("user_name") is None:
+        data = {
+            "Name": "Sign In",
+            "Email": "Sign In",   
+        }
+        
+    else:
+        data = {
+            "Name": session["user_name"],
+            "Email": session["user_email"], 
+        }
+
+    return render_template("order-complete.html", data=data,categories=categories,ringtones=ringtones,alerts=tempalert)
+    
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80,debug=True)
